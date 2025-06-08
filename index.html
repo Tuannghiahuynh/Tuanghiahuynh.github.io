@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tuần Nghĩa Huỳnh - Data Analyst Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link ref=style.css rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .glass-morphism {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .typewriter {
+            overflow: hidden;
+            border-right: .15em solid orange;
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: .15em;
+            animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: orange; }
+        }
+        
+        .tech-card {
+            transition: all 0.3s ease;
+        }
+        
+        .tech-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .project-book {
+            perspective: 1000px;
+            cursor: pointer;
+        }
+        
+        .book-cover {
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        
+        .project-book:hover .book-cover {
+            transform: rotateY(-15deg);
+        }
+        
+        .nav-link {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transition: left 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            left: 0;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass-morphism">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="text-2xl font-bold text-white">TNH</div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="nav-link text-white hover:text-blue-200 transition-colors">Trang chủ</a>
+                    <a href="#about" class="nav-link text-white hover:text-blue-200 transition-colors">Giới thiệu</a>
+                    <a href="#cv" class="nav-link text-white hover:text-blue-200 transition-colors">CV</a>
+                    <a href="#projects" class="nav-link text-white hover:text-blue-200 transition-colors">Dự án</a>
+                    <a href="#contact" class="nav-link text-white hover:text-blue-200 transition-colors">Liên hệ</a>
+                </div>
+                <div class="md:hidden">
+                    <button class="text-white">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen gradient-bg flex items-center justify-center">
+        <div class="container mx-auto px-6 text-center text-white">
+            <div class="floating">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face" 
+                     alt="Profile" class="w-32 h-32 rounded-full mx-auto mb-8 border-4 border-white shadow-2xl">
+            </div>
+            <h1 class="text-5xl md:text-7xl font-bold mb-4" data-aos="fade-up">
+                Tuần Nghĩa Huỳnh
+            </h1>
+            <div class="text-2xl md:text-3xl mb-8 typewriter" data-aos="fade-up" data-aos-delay="500">
+                Data Analyst | SQL Expert | Python Developer
+            </div>
+            <p class="text-xl mb-12 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="1000">
+                Chuyên gia phân tích dữ liệu với 1 năm kinh nghiệm trong việc xây dựng pipeline ETL, 
+                báo cáo BI tự động và tối ưu hóa quy trình dữ liệu
+            </p>
+            <div class="flex justify-center space-x-6" data-aos="fade-up" data-aos-delay="1500">
+                <a href="#contact" class="bg-white text-blue-600 px-8 py-4 rounded-full font-semibold hover:bg-blue-50 transition-colors">
+                    Liên hệ ngay
+                </a>
+                <a href="#projects" class="border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-blue-600 transition-colors">
+                    Xem dự án
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-16" data-aos="fade-up">Về tôi</h2>
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div data-aos="fade-right">
+                    <h3 class="text-2xl font-semibold mb-6">Data Analyst với niềm đam mê dữ liệu</h3>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Với 1 năm kinh nghiệm trong lĩnh vực phân tích dữ liệu, tôi chuyên môn trong việc 
+                        xây dựng các pipeline ETL hiệu quả, tạo ra các báo cáo BI tự động và tối ưu hóa 
+                        quy trình xử lý dữ liệu cho doanh nghiệp.
+                    </p>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Tôi có kinh nghiệm làm việc với các hệ cơ sở dữ liệu lớn, xây dựng dashboard 
+                        trực quan và cung cấp insights có giá trị để hỗ trợ ra quyết định kinh doanh.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="https://linkedin.com/in/tuannghiahuynh" class="text-blue-600 hover:text-blue-800 text-2xl">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="mailto:tuannghia@email.com" class="text-red-600 hover:text-red-800 text-2xl">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                        <a href="https://github.com/tuannghiahuynh" class="text-gray-800 hover:text-gray-600 text-2xl">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+                <div data-aos="fade-left">
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="tech-card bg-gradient-to-br from-blue-500 to-purple-600 p-6 rounded-xl text-white text-center">
+                            <i class="fas fa-database text-3xl mb-4"></i>
+                            <h4 class="font-semibold">SQL</h4>
+                            <p class="text-sm opacity-90">PostgreSQL, SQL Server, ClickHouse</p>
+                        </div>
+                        <div class="tech-card bg-gradient-to-br from-green-500 to-blue-600 p-6 rounded-xl text-white text-center">
+                            <i class="fab fa-python text-3xl mb-4"></i>
+                            <h4 class="font-semibold">Python</h4>
+                            <p class="text-sm opacity-90">Pandas, NumPy, ETL</p>
+                        </div>
+                        <div class="tech-card bg-gradient-to-br from-orange-500 to-red-600 p-6 rounded-xl text-white text-center">
+                            <i class="fas fa-wind text-3xl mb-4"></i>
+                            <h4 class="font-semibold">Airflow</h4>
+                            <p class="text-sm opacity-90">Workflow Management</p>
+                        </div>
+                        <div class="tech-card bg-gradient-to-br from-purple-500 to-pink-600 p-6 rounded-xl text-white text-center">
+                            <i class="fas fa-chart-bar text-3xl mb-4"></i>
+                            <h4 class="font-semibold">BI Tools</h4>
+                            <p class="text-sm opacity-90">Power BI, Superset</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CV Section -->
+    <section id="cv" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-16" data-aos="fade-up">Hồ sơ cá nhân</h2>
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-white rounded-2xl shadow-2xl p-8" data-aos="fade-up">
+                    <div class="text-center mb-8">
+                        <img src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=400&h=600&fit=crop" 
+                             alt="CV Preview" class="w-64 h-80 mx-auto rounded-lg shadow-lg object-cover">
+                    </div>
+                    <div class="text-center">
+                        <h3 class="text-2xl font-semibold mb-4">Tải xuống CV</h3>
+                        <p class="text-gray-600 mb-6">Xem chi tiết kinh nghiệm và kỹ năng của tôi</p>
+                        <a href="#" class="inline-flex items-center bg-blue-600 text-white px-8 py-4 rounded-full hover:bg-blue-700 transition-colors">
+                            <i class="fas fa-download mr-3"></i>
+                            Tải CV (PDF)
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-16" data-aos="fade-up">Dự án nổi bật</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div class="project-book" data-aos="fade-up" data-aos-delay="100">
+                    <div class="book-cover bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl p-8 text-white h-80 flex flex-col justify-between shadow-2xl">
+                        <div>
+                            <i class="fas fa-chart-line text-4xl mb-4"></i>
+                            <h3 class="text-xl font-bold mb-3">ETL Pipeline Tự động</h3>
+                            <p class="text-sm opacity-90">
+                                Xây dựng pipeline ETL với Airflow để xử lý dữ liệu từ nhiều nguồn khác nhau, 
+                                tự động hóa quy trình báo cáo hàng ngày.
+                            </p>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs bg-white bg-opacity-20 px-3 py-1 rounded-full">Python • SQL • Airflow</span>
+                            <i class="fas fa-external-link-alt"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-book" data-aos="fade-up" data-aos-delay="200">
+                    <div class="book-cover bg-gradient-to-br from-green-500 to-teal-600 rounded-xl p-8 text-white h-80 flex flex-col justify-between shadow-2xl">
+                        <div>
+                            <i class="fas fa-dashboard text-4xl mb-4"></i>
+                            <h3 class="text-xl font-bold mb-3">Dashboard BI Realtime</h3>
+                            <p class="text-sm opacity-90">
+                                Tạo dashboard tương tác với Superset hiển thị KPI kinh doanh realtime, 
+                                giúp management team theo dõi hiệu suất.
+                            </p>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs bg-white bg-opacity-20 px-3 py-1 rounded-full">Superset • PostgreSQL</span>
+                            <i class="fas fa-external-link-alt"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-book" data-aos="fade-up" data-aos-delay="300">
+                    <div class="book-cover bg-gradient-to-br from-orange-500 to-red-600 rounded-xl p-8 text-white h-80 flex flex-col justify-between shadow-2xl">
+                        <div>
+                            <i class="fas fa-database text-4xl mb-4"></i>
+                            <h3 class="text-xl font-bold mb-3">Data Warehouse Optimization</h3>
+                            <p class="text-sm opacity-90">
+                                Tối ưu hóa cấu trúc data warehouse, giảm 40% thời gian query và 
+                                cải thiện hiệu suất xử lý dữ liệu.
+                            </p>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs bg-white bg-opacity-20 px-3 py-1 rounded-full">ClickHouse • SQL</span>
+                            <i class="fas fa-external-link-alt"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 gradient-bg">
+        <div class="container mx-auto px-6 text-center text-white">
+            <h2 class="text-4xl font-bold mb-8" data-aos="fade-up">Liên hệ với tôi</h2>
+            <p class="text-xl mb-12 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+                Sẵn sàng thảo luận về các cơ hội hợp tác hoặc dự án data analytics thú vị
+            </p>
+            <div class="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+                <div class="glass-morphism rounded-xl p-8" data-aos="fade-up" data-aos-delay="300">
+                    <i class="fab fa-linkedin text-4xl mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2">LinkedIn</h3>
+                    <a href="https://linkedin.com/in/tuannghiahuynh" class="text-blue-200 hover:text-white">
+                        linkedin.com/in/tuannghiahuynh
+                    </a>
+                </div>
+                <div class="glass-morphism rounded-xl p-8" data-aos="fade-up" data-aos-delay="400">
+                    <i class="fas fa-envelope text-4xl mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2">Email</h3>
+                    <a href="mailto:tuannghia@email.com" class="text-blue-200 hover:text-white">
+                        tuannghia@email.com
+                    </a>
+                </div>
+                <div class="glass-morphism rounded-xl p-8" data-aos="fade-up" data-aos-delay="500">
+                    <i class="fab fa-github text-4xl mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2">GitHub</h3>
+                    <a href="https://github.com/tuannghiahuynh" class="text-blue-200 hover:text-white">
+                        github.com/tuannghiahuynh
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2024 Tuần Nghĩa Huỳnh. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="scripts.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Project book interaction
+        document.querySelectorAll('.project-book').forEach(book => {
+            book.addEventListener('click', function() {
+                // Add your project detail modal or navigation logic here
+                console.log('Opening project details...');
+            });
+        });
+
+        // Navbar background on scroll
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.classList.add('bg-white', 'bg-opacity-90');
+                nav.classList.remove('glass-morphism');
+            } else {
+                nav.classList.remove('bg-white', 'bg-opacity-90');
+                nav.classList.add('glass-morphism');
+            }
+        });
+    </script>
+</body>
+</html>

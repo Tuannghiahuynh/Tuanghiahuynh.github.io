@@ -3,368 +3,811 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tuần Nghĩa Huỳnh - Data Analyst Portfolio</title>
+    <title>Tuan Nghia Huynh - Data Analyst</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link ref=style.css rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --color-black: #1a1a1a;
+            --color-white: #ffffff;
+            --color-light-gray: #f5f5f5;
+            --color-dark-gray: #6b7280;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--color-light-gray);
+            color: var(--color-black);
+            line-height: 1.6;
         }
         
-        .gradient-bg {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
-        
-        .glass-morphism {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .floating {
-            animation: floating 3s ease-in-out infinite;
-        }
-        
-        @keyframes floating {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-        
-        .typewriter {
-            overflow: hidden;
-            border-right: .15em solid orange;
-            white-space: nowrap;
-            margin: 0 auto;
-            letter-spacing: .15em;
-            animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
-        }
-        
-        @keyframes typing {
-            from { width: 0 }
-            to { width: 100% }
-        }
-        
-        @keyframes blink-caret {
-            from, to { border-color: transparent }
-            50% { border-color: orange; }
-        }
-        
-        .tech-card {
+        /* Navigation Styles */
+        .hamburger-menu {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            z-index: 1000;
+            cursor: pointer;
+            background: var(--color-white);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
         }
         
-        .tech-card:hover {
-            transform: translateY(-10px) scale(1.05);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        .hamburger-menu:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
         }
         
-        .project-book {
-            perspective: 1000px;
+        .hamburger-line {
+            width: 25px;
+            height: 3px;
+            background: var(--color-black);
+            margin: 2px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+        
+        .hamburger-menu.active .hamburger-line:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+        
+        .hamburger-menu.active .hamburger-line:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .hamburger-menu.active .hamburger-line:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+        
+        .nav-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+        }
+        
+        .nav-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .nav-menu {
+            text-align: center;
+        }
+        
+        .nav-item {
+            display: block;
+            color: var(--color-white);
+            font-size: 2.5rem;
+            font-weight: 500;
+            text-decoration: none;
+            margin: 30px 0;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.3s ease;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .nav-overlay.active .nav-item {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .nav-item:nth-child(1) { transition-delay: 0.1s; }
+        .nav-item:nth-child(2) { transition-delay: 0.2s; }
+        .nav-item:nth-child(3) { transition-delay: 0.3s; }
+        .nav-item:nth-child(4) { transition-delay: 0.4s; }
+        .nav-item:nth-child(5) { transition-delay: 0.5s; }
+        
+        .nav-item:hover {
+            color: #fbbf24;
+            transform: scale(1.1);
+        }
+        
+        /* Page Container */
+        .page {
+            display: none;
+            min-height: 100vh;
+            padding: 80px 20px 20px;
+        }
+        
+        .page.active {
+            display: block;
+        }
+        
+        /* Pinterest-style Cards */
+        .pinterest-grid {
+            column-count: 1;
+            column-gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        @media (min-width: 640px) {
+            .pinterest-grid { column-count: 2; }
+        }
+        
+        @media (min-width: 1024px) {
+            .pinterest-grid { column-count: 3; }
+        }
+        
+        @media (min-width: 1280px) {
+            .pinterest-grid { column-count: 4; }
+        }
+        
+        .pinterest-card {
+            break-inside: avoid;
+            margin-bottom: 20px;
+            background: var(--color-white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
             cursor: pointer;
         }
         
-        .book-cover {
-            transition: transform 0.6s;
-            transform-style: preserve-3d;
+        .pinterest-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
         }
         
-        .project-book:hover .book-cover {
-            transform: rotateY(-15deg);
+        .card-image {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
         }
         
-        .nav-link {
+        .card-content {
+            padding: 20px;
+        }
+        
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--color-black);
+            margin-bottom: 10px;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .card-text {
+            color: var(--color-dark-gray);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        /* Hero Section */
+        .hero-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 80vh;
+            text-align: center;
+            background: linear-gradient(135deg, var(--color-light-gray) 0%, var(--color-white) 100%);
             position: relative;
             overflow: hidden;
         }
         
-        .nav-link::after {
+        .hero-section::before {
             content: '';
             position: absolute;
-            bottom: 0;
-            left: -100%;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, #667eea, #764ba2);
-            transition: left 0.3s ease;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(26,26,26,0.03) 1px, transparent 1px);
+            background-size: 30px 30px;
+            animation: float 20s ease-in-out infinite;
         }
         
-        .nav-link:hover::after {
-            left: 0;
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(-20px, -20px) rotate(180deg); }
+        }
+        
+        .hero-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--color-white);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--color-black);
+            margin-bottom: 15px;
+            font-family: 'Playfair Display', serif;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--color-dark-gray);
+            margin-bottom: 30px;
+            font-weight: 400;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-description {
+            max-width: 600px;
+            color: var(--color-dark-gray);
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Artistic Elements */
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .shape {
+            position: absolute;
+            opacity: 0.1;
+            animation: floatShapes 15s ease-in-out infinite;
+        }
+        
+        .shape:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .shape:nth-child(2) {
+            top: 60%;
+            right: 20%;
+            animation-delay: 5s;
+        }
+        
+        .shape:nth-child(3) {
+            bottom: 30%;
+            left: 30%;
+            animation-delay: 10s;
+        }
+        
+        @keyframes floatShapes {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-20px) rotate(120deg); }
+            66% { transform: translateY(10px) rotate(240deg); }
+        }
+        
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 2px solid;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .btn-primary {
+            background: var(--color-black);
+            color: var(--color-white);
+            border-color: var(--color-black);
+        }
+        
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--color-black);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            color: var(--color-black);
+            border-color: var(--color-black);
+        }
+        
+        .btn-outline:hover {
+            background: var(--color-black);
+            color: var(--color-white);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        /* Section Titles */
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--color-black);
+            font-family: 'Playfair Display', serif;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--color-dark-gray);
+            border-radius: 2px;
+        }
+        
+        /* Skills Tags */
+        .skill-tag {
+            display: inline-block;
+            padding: 8px 16px;
+            background: var(--color-white);
+            border: 2px solid var(--color-light-gray);
+            border-radius: 25px;
+            margin: 5px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--color-black);
+            transition: all 0.3s ease;
+        }
+        
+        .skill-tag:hover {
+            background: var(--color-black);
+            color: var(--color-white);
+            border-color: var(--color-black);
+            transform: translateY(-2px);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2rem; }
+            .hero-subtitle { font-size: 1.1rem; }
+            .section-title { font-size: 2rem; }
+            .nav-item { font-size: 2rem; }
+            .hamburger-menu { top: 20px; right: 20px; }
         }
     </style>
 </head>
-<body class="bg-gray-50">
-    <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 glass-morphism">
-        <div class="container mx-auto px-6 py-4">
-            <div class="flex justify-between items-center">
-                <div class="text-2xl font-bold text-white">TNH</div>
-                <div class="hidden md:flex space-x-8">
-                    <a href="#home" class="nav-link text-white hover:text-blue-200 transition-colors">Trang chủ</a>
-                    <a href="#about" class="nav-link text-white hover:text-blue-200 transition-colors">Giới thiệu</a>
-                    <a href="#cv" class="nav-link text-white hover:text-blue-200 transition-colors">CV</a>
-                    <a href="#projects" class="nav-link text-white hover:text-blue-200 transition-colors">Dự án</a>
-                    <a href="#contact" class="nav-link text-white hover:text-blue-200 transition-colors">Liên hệ</a>
-                </div>
-                <div class="md:hidden">
-                    <button class="text-white">
-                        <i class="fas fa-bars"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </nav>
+<body>
+    <!-- Hamburger Menu -->
+    <div class="hamburger-menu" id="hamburgerMenu">
+        <div class="hamburger-line"></div>
+        <div class="hamburger-line"></div>
+        <div class="hamburger-line"></div>
+    </div>
 
-    <!-- Hero Section -->
-    <section id="home" class="min-h-screen gradient-bg flex items-center justify-center">
-        <div class="container mx-auto px-6 text-center text-white">
-            <div class="floating">
-                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face" 
-                     alt="Profile" class="w-32 h-32 rounded-full mx-auto mb-8 border-4 border-white shadow-2xl">
+    <!-- Navigation Overlay -->
+    <div class="nav-overlay" id="navOverlay">
+        <nav class="nav-menu">
+            <a href="#" class="nav-item" data-page="home">Home</a>
+            <a href="#" class="nav-item" data-page="about">About</a>
+            <a href="#" class="nav-item" data-page="cv">Resume</a>
+            <a href="#" class="nav-item" data-page="projects">Projects</a>
+            <a href="#" class="nav-item" data-page="contact">Contact</a>
+        </nav>
+    </div>
+
+    <!-- Home Page -->
+    <div class="page active" id="home">
+        <div class="hero-section">
+            <div class="floating-shapes">
+                <div class="shape">
+                    <i class="fas fa-chart-line" style="font-size: 4rem; color: var(--color-dark-gray);"></i>
+                </div>
+                <div class="shape">
+                    <i class="fas fa-database" style="font-size: 3rem; color: var(--color-dark-gray);"></i>
+                </div>
+                <div class="shape">
+                    <i class="fab fa-python" style="font-size: 3.5rem; color: var(--color-dark-gray);"></i>
+                </div>
             </div>
-            <h1 class="text-5xl md:text-7xl font-bold mb-4" data-aos="fade-up">
-                Tuần Nghĩa Huỳnh
-            </h1>
-            <div class="text-2xl md:text-3xl mb-8 typewriter" data-aos="fade-up" data-aos-delay="500">
-                Data Analyst | SQL Expert | Python Developer
-            </div>
-            <p class="text-xl mb-12 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="1000">
-                Chuyên gia phân tích dữ liệu với 1 năm kinh nghiệm trong việc xây dựng pipeline ETL, 
-                báo cáo BI tự động và tối ưu hóa quy trình dữ liệu
+            
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face" 
+                 alt="Tuan Nghia Huynh" class="hero-avatar">
+            
+            <h1 class="hero-title">Huynh Tuan Nghia</h1>
+            <p class="hero-subtitle">Data Analyst</p>
+            <p class="hero-description">
+                Might be a Data Analyst now, soon to become Data Manager, keep on studying, learning everything possible, i don't might taking on every challenges, because that's what keep me interested
             </p>
-            <div class="flex justify-center space-x-6" data-aos="fade-up" data-aos-delay="1500">
-                <a href="#contact" class="bg-white text-blue-600 px-8 py-4 rounded-full font-semibold hover:bg-blue-50 transition-colors">
-                    Liên hệ ngay
-                </a>
-                <a href="#projects" class="border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-blue-600 transition-colors">
-                    Xem dự án
-                </a>
+            
+            <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+                <a href="#" class="btn btn-primary" data-page="about">Explore More</a>
+                <a href="#" class="btn btn-outline" data-page="contact">Connect</a>
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- About Section -->
-    <section id="about" class="py-20 bg-white">
-        <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold text-center mb-16" data-aos="fade-up">Về tôi</h2>
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div data-aos="fade-right">
-                    <h3 class="text-2xl font-semibold mb-6">Data Analyst với niềm đam mê dữ liệu</h3>
-                    <p class="text-gray-600 mb-6 leading-relaxed">
-                        Với 1 năm kinh nghiệm trong lĩnh vực phân tích dữ liệu, tôi chuyên môn trong việc 
-                        xây dựng các pipeline ETL hiệu quả, tạo ra các báo cáo BI tự động và tối ưu hóa 
-                        quy trình xử lý dữ liệu cho doanh nghiệp.
-                    </p>
-                    <p class="text-gray-600 mb-6 leading-relaxed">
-                        Tôi có kinh nghiệm làm việc với các hệ cơ sở dữ liệu lớn, xây dựng dashboard 
-                        trực quan và cung cấp insights có giá trị để hỗ trợ ra quyết định kinh doanh.
-                    </p>
-                    <div class="flex space-x-4">
-                        <a href="https://linkedin.com/in/tuannghiahuynh" class="text-blue-600 hover:text-blue-800 text-2xl">
-                            <i class="fab fa-linkedin"></i>
-                        </a>
-                        <a href="mailto:tuannghia@email.com" class="text-red-600 hover:text-red-800 text-2xl">
-                            <i class="fas fa-envelope"></i>
-                        </a>
-                        <a href="https://github.com/tuannghiahuynh" class="text-gray-800 hover:text-gray-600 text-2xl">
-                            <i class="fab fa-github"></i>
-                        </a>
+    <!-- About Page -->
+    <div class="page" id="about">
+        <div style="max-width: 1200px; margin: 0 auto; padding: 40px 20px;">
+            <h2 class="section-title">About Me</h2>
+            
+            <div class="pinterest-grid">
+                <!-- Personal Story Card -->
+                <div class="pinterest-card">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=250&fit=crop" 
+                         alt="Data Analysis" class="card-image">
+                    <div class="card-content">
+                        <h3 class="card-title">My Journey</h3>
+                        <p class="card-text">
+                            From a math-loving student to finding my true passion in data analysis. 
+                            Every dataset is a mystery waiting to be decoded.
+                        </p>
                     </div>
                 </div>
-                <div data-aos="fade-left">
-                    <div class="grid grid-cols-2 gap-6">
-                        <div class="tech-card bg-gradient-to-br from-blue-500 to-purple-600 p-6 rounded-xl text-white text-center">
-                            <i class="fas fa-database text-3xl mb-4"></i>
-                            <h4 class="font-semibold">SQL</h4>
-                            <p class="text-sm opacity-90">PostgreSQL, SQL Server, ClickHouse</p>
-                        </div>
-                        <div class="tech-card bg-gradient-to-br from-green-500 to-blue-600 p-6 rounded-xl text-white text-center">
-                            <i class="fab fa-python text-3xl mb-4"></i>
-                            <h4 class="font-semibold">Python</h4>
-                            <p class="text-sm opacity-90">Pandas, NumPy, ETL</p>
-                        </div>
-                        <div class="tech-card bg-gradient-to-br from-orange-500 to-red-600 p-6 rounded-xl text-white text-center">
-                            <i class="fas fa-wind text-3xl mb-4"></i>
-                            <h4 class="font-semibold">Airflow</h4>
-                            <p class="text-sm opacity-90">Workflow Management</p>
-                        </div>
-                        <div class="tech-card bg-gradient-to-br from-purple-500 to-pink-600 p-6 rounded-xl text-white text-center">
-                            <i class="fas fa-chart-bar text-3xl mb-4"></i>
-                            <h4 class="font-semibold">BI Tools</h4>
-                            <p class="text-sm opacity-90">Power BI, Superset</p>
-                        </div>
+
+                <!-- Philosophy Card -->
+                <div class="pinterest-card">
+                    <div class="card-content" style="padding: 40px 20px; text-align: center; background: linear-gradient(135deg, var(--color-light-gray), var(--color-white));">
+                        <i class="fas fa-lightbulb" style="font-size: 3rem; color: var(--color-dark-gray); margin-bottom: 20px;"></i>
+                        <h3 class="card-title">Work Philosophy</h3>
+                        <p class="card-text">
+                            "Data is not just numbers. They are stories about people, 
+                            about behavior, about the future."
+                        </p>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- CV Section -->
-    <section id="cv" class="py-20 bg-gray-50">
-        <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold text-center mb-16" data-aos="fade-up">Hồ sơ cá nhân</h2>
-            <div class="max-w-4xl mx-auto">
-                <div class="bg-white rounded-2xl shadow-2xl p-8" data-aos="fade-up">
-                    <div class="text-center mb-8">
-                        <img src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=400&h=600&fit=crop" 
-                             alt="CV Preview" class="w-64 h-80 mx-auto rounded-lg shadow-lg object-cover">
-                    </div>
-                    <div class="text-center">
-                        <h3 class="text-2xl font-semibold mb-4">Tải xuống CV</h3>
-                        <p class="text-gray-600 mb-6">Xem chi tiết kinh nghiệm và kỹ năng của tôi</p>
-                        <a href="#" class="inline-flex items-center bg-blue-600 text-white px-8 py-4 rounded-full hover:bg-blue-700 transition-colors">
-                            <i class="fas fa-download mr-3"></i>
-                            Tải CV (PDF)
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="py-20 bg-white">
-        <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold text-center mb-16" data-aos="fade-up">Dự án nổi bật</h2>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Project 1 -->
-                <div class="project-book" data-aos="fade-up" data-aos-delay="100">
-                    <div class="book-cover bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl p-8 text-white h-80 flex flex-col justify-between shadow-2xl">
-                        <div>
-                            <i class="fas fa-chart-line text-4xl mb-4"></i>
-                            <h3 class="text-xl font-bold mb-3">ETL Pipeline Tự động</h3>
-                            <p class="text-sm opacity-90">
-                                Xây dựng pipeline ETL với Airflow để xử lý dữ liệu từ nhiều nguồn khác nhau, 
-                                tự động hóa quy trình báo cáo hàng ngày.
-                            </p>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-xs bg-white bg-opacity-20 px-3 py-1 rounded-full">Python • SQL • Airflow</span>
-                            <i class="fas fa-external-link-alt"></i>
+                <!-- Skills Card -->
+                <div class="pinterest-card">
+                    <div class="card-content">
+                        <h3 class="card-title">Core Skills</h3>
+                        <div style="margin-top: 15px;">
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">SQL</span>
+                            <span class="skill-tag">Tableau</span>
+                            <span class="skill-tag">Power BI</span>
+                            <span class="skill-tag">Machine Learning</span>
+                            <span class="skill-tag">Data Visualization</span>
+                            <span class="skill-tag">Statistical Analysis</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Project 2 -->
-                <div class="project-book" data-aos="fade-up" data-aos-delay="200">
-                    <div class="book-cover bg-gradient-to-br from-green-500 to-teal-600 rounded-xl p-8 text-white h-80 flex flex-col justify-between shadow-2xl">
-                        <div>
-                            <i class="fas fa-dashboard text-4xl mb-4"></i>
-                            <h3 class="text-xl font-bold mb-3">Dashboard BI Realtime</h3>
-                            <p class="text-sm opacity-90">
-                                Tạo dashboard tương tác với Superset hiển thị KPI kinh doanh realtime, 
-                                giúp management team theo dõi hiệu suất.
-                            </p>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-xs bg-white bg-opacity-20 px-3 py-1 rounded-full">Superset • PostgreSQL</span>
-                            <i class="fas fa-external-link-alt"></i>
+                <!-- Education Card -->
+                <div class="pinterest-card">
+                    <div class="card-content">
+                        <h3 class="card-title">Education</h3>
+                        <div style="margin-top: 15px;">
+                            <p style="color: var(--color-black); font-weight: 600;">Bachelor's Degree</p>
+                            <p class="card-text">National Economics University</p>
+                            <p class="card-text">2019 - 2023</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Project 3 -->
-                <div class="project-book" data-aos="fade-up" data-aos-delay="300">
-                    <div class="book-cover bg-gradient-to-br from-orange-500 to-red-600 rounded-xl p-8 text-white h-80 flex flex-col justify-between shadow-2xl">
-                        <div>
-                            <i class="fas fa-database text-4xl mb-4"></i>
-                            <h3 class="text-xl font-bold mb-3">Data Warehouse Optimization</h3>
-                            <p class="text-sm opacity-90">
-                                Tối ưu hóa cấu trúc data warehouse, giảm 40% thời gian query và 
-                                cải thiện hiệu suất xử lý dữ liệu.
-                            </p>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-xs bg-white bg-opacity-20 px-3 py-1 rounded-full">ClickHouse • SQL</span>
-                            <i class="fas fa-external-link-alt"></i>
-                        </div>
+                <!-- Hobbies Card -->
+                <div class="pinterest-card">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=200&fit=crop" 
+                         alt="Hobbies" class="card-image">
+                    <div class="card-content">
+                        <h3 class="card-title">Hobbies</h3>
+                        <p class="card-text">
+                            When not working with data, I enjoy reading books, 
+                            photography and exploring new coffee shops.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Quote Card -->
+                <div class="pinterest-card">
+                    <div class="card-content" style="background: var(--color-black); color: var(--color-white); padding: 40px 20px; text-align: center;">
+                        <i class="fas fa-quote-left" style="font-size: 2rem; opacity: 0.5; margin-bottom: 20px;"></i>
+                        <p style="font-size: 1.1rem; font-style: italic; margin-bottom: 20px;">
+                            "In every dataset lies wonderful stories waiting to be told."
+                        </p>
+                        <p style="font-weight: 600;">- Tuan Nghia</p>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- Contact Section -->
-    <section id="contact" class="py-20 gradient-bg">
-        <div class="container mx-auto px-6 text-center text-white">
-            <h2 class="text-4xl font-bold mb-8" data-aos="fade-up">Liên hệ với tôi</h2>
-            <p class="text-xl mb-12 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="200">
-                Sẵn sàng thảo luận về các cơ hội hợp tác hoặc dự án data analytics thú vị
+    <!-- CV Page -->
+    <div class="page" id="cv">
+        <div style="max-width: 1000px; margin: 0 auto; padding: 40px 20px;">
+            <h2 class="section-title">Resume</h2>
+            
+            <div class="pinterest-grid">
+                <!-- CV Preview -->
+                <div class="pinterest-card" style="text-align: center;">
+                    <div class="card-content" style="padding: 40px;">
+                        <img src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=250&h=350&fit=crop" 
+                             alt="CV Preview" style="width: 200px; height: 280px; object-fit: cover; border-radius: 10px; margin-bottom: 20px;">
+                        <h3 class="card-title">Download CV</h3>
+                        <p class="card-text">Full version with detailed experience</p>
+                        <a href="#" class="btn btn-primary" style="margin-top: 20px; display: inline-block;">
+                            <i class="fas fa-download"></i> Download CV
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Experience -->
+                <div class="pinterest-card">
+                    <div class="card-content">
+                        <h3 class="card-title">Work Experience</h3>
+                        <div style="margin-top: 20px;">
+                            <div style="margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid var(--color-light-gray);">
+                                <h4 style="color: var(--color-black); font-weight: 600;">Data Analyst</h4>
+                                <p style="color: var(--color-dark-gray); font-size: 0.9rem;">TechCorp Vietnam</p>
+                                <p style="color: var(--color-dark-gray); font-size: 0.8rem;">2023 - Present</p>
+                            </div>
+                            <div>
+                                <h4 style="color: var(--color-black); font-weight: 600;">Junior Data Analyst</h4>
+                                <p style="color: var(--color-dark-gray); font-size: 0.9rem;">StartupXYZ</p>
+                                <p style="color: var(--color-dark-gray); font-size: 0.8rem;">2022 - 2023</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Certifications -->
+                <div class="pinterest-card">
+                    <div class="card-content">
+                        <h3 class="card-title">Certifications</h3>
+                        <div style="margin-top: 15px;">
+                            <div style="margin-bottom: 15px;">
+                                <p style="color: var(--color-black); font-weight: 600;">Google Data Analytics Certificate</p>
+                                <p class="card-text">Google - 2023</p>
+                            </div>
+                            <div style="margin-bottom: 15px;">
+                                <p style="color: var(--color-black); font-weight: 600;">Python for Data Science</p>
+                                <p class="card-text">IBM - 2022</p>
+                            </div>
+                            <div>
+                                <p style="color: var(--color-black); font-weight: 600;">Tableau Desktop Specialist</p>
+                                <p class="card-text">Tableau - 2022</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Achievements -->
+                <div class="pinterest-card">
+                    <div class="card-content" style="background: linear-gradient(135deg, var(--color-light-gray), var(--color-white));">
+                        <h3 class="card-title">Key Achievements</h3>
+                        <div style="margin-top: 15px;">
+                            <p class="card-text">🏆 First place in Data Visualization Contest 2023</p>
+                            <p class="card-text">📊 Created dashboard that increased company efficiency by 25%</p>
+                            <p class="card-text">🎯 Achieved 92% accuracy in market trend predictions</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Projects Page -->
+    <div class="page" id="projects">
+        <div style="max-width: 1200px; margin: 0 auto; padding: 40px 20px;">
+            <h2 class="section-title">My Projects</h2>
+            
+            <div class="pinterest-grid">
+                <!-- Project 1 - E-commerce Dropshipping Dashboard -->
+                <div class="pinterest-card">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=250&fit=crop" 
+                         alt="E-commerce Dropshipping Dashboard" class="card-image">
+                    <div class="card-content">
+                        <h3 class="card-title">E-com Dropshipping Tracking Dashboard</h3>
+                        <p class="card-text">
+                            Built a comprehensive tracking dashboard for e-commerce dropshipping operations using Power BI. 
+                            ETL pipeline from Google Sheets to PostgreSQL using Python (Pandas, Numpy, Airflow) with on-premise personal server for data refresh.
+                        </p>
+                        <div style="margin-top: 15px;">
+                            <span class="skill-tag">Power BI</span>
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">PostgreSQL</span>
+                            <span class="skill-tag">Airflow</span>
+                            <span class="skill-tag">Pandas</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 - Accounting Reports -->
+                <div class="pinterest-card">
+                    <div class="card-content" style="background: linear-gradient(135deg, var(--color-black), var(--color-dark-gray)); color: var(--color-white);">
+                        <i class="fas fa-chart-bar" style="font-size: 3rem; margin-bottom: 20px;"></i>
+                        <h3 class="card-title" style="color: var(--color-white);">Comprehensive Accounting Reports</h3>
+                        <p style="color: var(--color-white); opacity: 0.9;">
+                            Developed and tracked comprehensive accounting reports including assets, cash flow, inventory, business results, and projected P&L. 
+                            Built using Superset and ClickHouse, collaborating with DE team for ETL from MISA to ClickHouse with Airflow automation.
+                        </p>
+                        <div style="margin-top: 15px;">
+                            <span class="skill-tag" style="background: var(--color-white); color: var(--color-black);">Superset</span>
+                            <span class="skill-tag" style="background: var(--color-white); color: var(--color-black);">ClickHouse</span>
+                            <span class="skill-tag" style="background: var(--color-white); color: var(--color-black);">Airflow</span>
+                            <span class="skill-tag" style="background: var(--color-white); color: var(--color-black);">MISA ERP</span>
+                        </div>
+                    </div>
+                </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Page -->
+    <div class="page" id="contact">
+        <div style="max-width: 800px; margin: 0 auto; padding: 40px 20px; text-align: center;">
+            <h2 class="section-title">Connect with me</h2>
+            <p style="font-size: 1.2rem; color: var(--color-dark-gray); margin-bottom: 50px;">
+                Always ready to discuss data, interesting projects, or just grab a coffee!
             </p>
-            <div class="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-                <div class="glass-morphism rounded-xl p-8" data-aos="fade-up" data-aos-delay="300">
-                    <i class="fab fa-linkedin text-4xl mb-4"></i>
-                    <h3 class="text-xl font-semibold mb-2">LinkedIn</h3>
-                    <a href="https://linkedin.com/in/tuannghiahuynh" class="text-blue-200 hover:text-white">
-                        linkedin.com/in/tuannghiahuynh
-                    </a>
+            
+            <div class="pinterest-grid">
+                <!-- Email Card -->
+                <div class="pinterest-card" style="text-align: center;">
+                    <div class="card-content" style="padding: 40px 20px;">
+                        <i class="fas fa-envelope" style="font-size: 3rem; color: var(--color-dark-gray); margin-bottom: 20px;"></i>
+                        <h3 class="card-title">Email</h3>
+                        <p class="card-text">htnghia300399@gmail.com</p>
+                        <a href="mailto:htnghia300399@gmail.com" class="btn btn-primary" style="margin-top: 15px; display: inline-block;">
+                            Send Email
+                        </a>
+                    </div>
                 </div>
-                <div class="glass-morphism rounded-xl p-8" data-aos="fade-up" data-aos-delay="400">
-                    <i class="fas fa-envelope text-4xl mb-4"></i>
-                    <h3 class="text-xl font-semibold mb-2">Email</h3>
-                    <a href="mailto:tuannghia@email.com" class="text-blue-200 hover:text-white">
-                        tuannghia@email.com
-                    </a>
+
+                <!-- LinkedIn Card -->
+                <div class="pinterest-card" style="text-align: center;">
+                    <div class="card-content" style="padding: 40px 20px; background: linear-gradient(135deg, #0077b5, #005885); color: white;">
+                        <i class="fab fa-linkedin" style="font-size: 3rem; margin-bottom: 20px;"></i>
+                        <h3 style="color: white; margin-bottom: 10px;">LinkedIn</h3>
+                        <p style="color: white; opacity: 0.9;">Professional Connection</p>
+                        <a href="https://www.linkedin.com/in/ngh%C4%A9a-hu%E1%BB%B3nh-tu%E1%BA%A5n-55751a200/" class="btn" style="margin-top: 15px; display: inline-block; background: white; color: #0077b5; border-color: white;">
+                            Connect
+                        </a>
+                    </div>
                 </div>
-                <div class="glass-morphism rounded-xl p-8" data-aos="fade-up" data-aos-delay="500">
-                    <i class="fab fa-github text-4xl mb-4"></i>
-                    <h3 class="text-xl font-semibold mb-2">GitHub</h3>
-                    <a href="https://github.com/tuannghiahuynh" class="text-blue-200 hover:text-white">
-                        github.com/tuannghiahuynh
-                    </a>
+
+                <!-- Phone Card -->
+                <div class="pinterest-card" style="text-align: center;">
+                    <div class="card-content" style="padding: 40px 20px;">
+                        <i class="fas fa-phone" style="font-size: 3rem; color: var(--color-dark-gray); margin-bottom: 20px;"></i>
+                        <h3 class="card-title">Phone</h3>
+                        <p class="card-text">+84 123 456 789</p>
+                        <a href="tel:+84123456789" class="btn btn-outline" style="margin-top: 15px; display: inline-block;">
+                            Call Now
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Location Card -->
+                <div class="pinterest-card" style="text-align: center;">
+                    <div class="card-content" style="padding: 40px 20px; background: linear-gradient(135deg, var(--color-light-gray), var(--color-white));">
+                        <i class="fas fa-map-marker-alt" style="font-size: 3rem; color: var(--color-dark-gray); margin-bottom: 20px;"></i>
+                        <h3 class="card-title">Location</h3>
+                        <p class="card-text">Hanoi, Vietnam</p>
+                    </div>
+                </div>
+
+                <!-- Coffee Card -->
+                <div class="pinterest-card" style="text-align: center;">
+                    <div class="card-content" style="padding: 40px 20px; background: var(--color-black); color: var(--color-white);">
+                        <i class="fas fa-coffee" style="font-size: 3rem; margin-bottom: 20px;"></i>
+                        <h3 style="color: var(--color-white); margin-bottom: 10px;">Coffee & Chat</h3>
+                        <p style="color: var(--color-white); opacity: 0.9;">
+                            Prefer to meet in person? Let's grab coffee and talk about data!
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Social Media Card -->
+                <div class="pinterest-card" style="text-align: center;">
+                    <div class="card-content" style="padding: 40px 20px;">
+                        <h3 class="card-title">Follow Me</h3>
+                        <div style="margin-top: 20px; display: flex; justify-content: center; gap: 20px;">
+                            <a href="#" style="color: var(--color-dark-gray); font-size: 2rem;">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" style="color: var(--color-dark-gray); font-size: 2rem;">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" style="color: var(--color-dark-gray); font-size: 2rem;">
+                                <i class="fab fa-facebook"></i>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-8">
-        <div class="container mx-auto px-6 text-center">
-            <p>&copy; 2024 Tuần Nghĩa Huỳnh. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-    <script src="scripts.js"></script>
     <script>
-        // Initialize AOS
-        AOS.init({
-            duration: 1000,
-            once: true
+        // Navigation functionality
+        const hamburgerMenu = document.getElementById('hamburgerMenu');
+        const navOverlay = document.getElementById('navOverlay');
+        const navItems = document.querySelectorAll('.nav-item');
+        const pages = document.querySelectorAll('.page');
+        const buttons = document.querySelectorAll('[data-page]');
+
+        // Toggle navigation
+        hamburgerMenu.addEventListener('click', () => {
+            hamburgerMenu.classList.toggle('active');
+            navOverlay.classList.toggle('active');
         });
 
-        // Smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-
-        // Project book interaction
-        document.querySelectorAll('.project-book').forEach(book => {
-            book.addEventListener('click', function() {
-                // Add your project detail modal or navigation logic here
-                console.log('Opening project details...');
-            });
-        });
-
-        // Navbar background on scroll
-        window.addEventListener('scroll', function() {
-            const nav = document.querySelector('nav');
-            if (window.scrollY > 100) {
-                nav.classList.add('bg-white', 'bg-opacity-90');
-                nav.classList.remove('glass-morphism');
-            } else {
-                nav.classList.remove('bg-white', 'bg-opacity-90');
-                nav.classList.add('glass-morphism');
+        // Close navigation when clicking outside
+        navOverlay.addEventListener('click', (e) => {
+            if (e.target === navOverlay) {
+                hamburgerMenu.classList.remove('active');
+                navOverlay.classList.remove('active');
             }
+        });
+
+        // Page navigation
+        function showPage(pageId) {
+            // Hide all pages
+            pages.forEach(page => page.classList.remove('active'));
+            
+            // Show selected page
+            const targetPage = document.getElementById(pageId);
+            if (targetPage) {
+                targetPage.classList.add('active');
+            }
+            
+            // Close navigation
+            hamburgerMenu.classList.remove('active');
+            navOverlay.classList.remove('active');
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // Add event listeners to all navigation items and buttons
+        [...navItems, ...buttons].forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                const pageId = item.getAttribute('data-page');
+                if (pageId) {
+                    showPage(pageId);
+                }
+            });
+        });
+
+        // Add hover effects to cards
+        document.querySelectorAll('.pinterest-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px) rotate(1deg)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) rotate(0deg)';
+            });
         });
     </script>
 </body>
